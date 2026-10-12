@@ -14,6 +14,8 @@
             --text-light: #ffffff;
             --text-muted: #86888a;
             --harmony-good: #2ecc71;
+            --harmony-neutral: #f1c40f;
+            --harmony-clash: #e74c3c;
         }
 
         * {
@@ -27,7 +29,9 @@
             background-color: var(--bg-deep);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 60px;
+            padding-bottom: 80px;
+            position: relative;
+            min-height: 100vh;
         }
 
         header {
@@ -57,7 +61,7 @@
         main {
             max-width: 1200px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 0 20px 40px 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
@@ -216,20 +220,43 @@
 
         .report-title { color: var(--text-light); font-size: 1.2rem; font-weight: bold; }
         .report-price { color: var(--accent-gold); font-size: 1.3rem; font-weight: bold; }
+
+        .harmony-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #12161a;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Astra<span>Sky</span></h1>
-        <p>Free Birth Charts, Daily Horoscopes & Premium Transitions</p>
+        <p>Free Charts, Linda Goodman Love Matching & Custom Transitions</p>
     </header>
 
     <main>
-        <!-- Panel 1: Free Astrological Features -->
         <div class="panel">
             <div class="tabs">
                 <button class="tab-btn active" id="tabChart" onclick="switchTab('chart')">Birth Chart Calculator</button>
+                <button class="tab-btn" id="tabLove" onclick="switchTab('love')">Love Signs Matching</button>
                 <button class="tab-btn" id="tabDaily" onclick="switchTab('daily')">Daily Horoscope</button>
             </div>
 
@@ -253,44 +280,37 @@
                 <button class="btn" onclick="processFreeRequest('chart')">Calculate My Placements</button>
             </div>
 
-            <!-- Daily Horoscope Interface -->
-            <div id="sectionDaily" style="display: none;">
-                <h2>Your Free Daily Alignment</h2>
+            <!-- Love Signs Form Interface -->
+            <div id="sectionLove" style="display: none;">
+                <h2>Linda Goodman Vibe Tracker</h2>
                 <div class="form-group">
-                    <label>Select Your Zodiac Sign</label>
-                    <select id="dailySign">
-                        <option value="Aries">Aries</option>
-                        <option value="Taurus">Taurus</option>
-                        <option value="Gemini">Gemini</option>
-                        <option value="Cancer">Cancer</option>
-                        <option value="Leo">Leo</option>
-                        <option value="Virgo">Virgo</option>
-                        <option value="Libra">Libra</option>
-                        <option value="Scorpio">Scorpio</option>
-                        <option value="Sagittarius">Sagittarius</option>
-                        <option value="Capricorn">Capricorn</option>
-                        <option value="Aquarius">Aquarius</option>
-                        <option value="Pisces">Pisces</option>
+                    <label>Your Sun Sign</label>
+                    <select id="userSign">
+                        <option value="">-- Choose Sign --</option>
+                        <option value="0">Aries</option>
+                        <option value="1">Taurus</option>
+                        <option value="2">Gemini</option>
+                        <option value="3">Cancer</option>
+                        <option value="4">Leo</option>
+                        <option value="5">Virgo</option>
+                        <option value="6">Libra</option>
+                        <option value="7">Scorpio</option>
+                        <option value="8">Sagittarius</option>
+                        <option value="9">Capricorn</option>
+                        <option value="10">Aquarius</option>
+                        <option value="11">Pisces</option>
                     </select>
                 </div>
-                <button class="btn" onclick="processFreeRequest('daily')">Reveal Today's Horoscope</button>
-            </div>
-
-            <!-- Unified Email Lead Gate -->
-            <div class="lead-box" id="leadGate">
-                <h3 style="color: var(--text-light); margin-bottom: 10px;">Unlock Your Cosmic Profile</h3>
-                <p style="font-size: 0.85rem; margin-bottom: 15px;">Enter your email to verify your user profile and unlock instant calculations.</p>
-                <input type="email" id="leadEmail" placeholder="name@example.com" style="margin-bottom: 15px;">
-                <button class="btn" style="padding: 10px; font-size: 0.95rem;" onclick="submitLeadData()">Access Free Analysis</button>
-            </div>
-
-            <!-- Calculation Output Display -->
-            <div class="results-box" id="resultsBox">
-                <div id="chartOutput" style="display: none;">
-                    <h3 style="color: var(--accent-gold); margin-bottom: 15px;">Your Calculated Core Triad</h3>
-                    <div class="chart-grid">
-                        <div class="chart-item"><span>Sun Sign</span><strong id="resSun">-</strong></div>
-                        <div class="chart-item"><span>Moon Sign</span><strong id="resMoon">-</strong></div>
-                        <div class="chart-item"><span>Rising Sign</span><strong id="resRising">-</strong></div>
-                    </div>
-                    <p style
+                <div class="form-group">
+                    <label>Partner's Sun Sign</label>
+                    <select id="partnerSign">
+                        <option value="">-- Choose Sign --</option>
+                        <option value="0">Aries</option>
+                        <option value="1">Taurus</option>
+                        <option value="2">Gemini</option>
+                        <option value="3">Cancer</option>
+                        <option value="4">Leo</option>
+                        <option value="5">Virgo</option>
+                        <option value="6">Libra</option>
+                        <option value="7">Scorpio</option>
+                        <option value="8"
