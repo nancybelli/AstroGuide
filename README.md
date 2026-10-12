@@ -1,4 +1,4 @@
-# AstraSky Astrology Platform
+# AstroGuide Astrology Platform
 
 A single-page, responsive web application featuring free birth chart calculations, localized daily horoscopes, a built-in email lead-capture engine, and premium report up-sells based on Linda Goodman's Sun-Sign compatibility frameworks.
 
